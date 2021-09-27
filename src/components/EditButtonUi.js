@@ -148,7 +148,7 @@ function EditButton({post:{id,title,imagePost, body}}) {
              content="Update!"
              labelPosition='right'
              disabled={ (values.title.trim() === title || values.title.trim() === "")  
-             && (values.body.trim() === body || values.body.trim() === "") }
+             && (values.body.trim() === body || values.body.trim() === "") && fileSelected === ''}
              icon='checkmark'
              onClick={() => updatePostCallback()}
              positive
