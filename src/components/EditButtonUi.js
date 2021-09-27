@@ -35,7 +35,14 @@ function EditButton({post:{id,title,imagePost, body}}) {
           }
         }
     ],
-       onCompleted:() => setOpen(false),
+       onCompleted:() => {
+        values.title = title
+        setFileSelected("")
+        values.body = body
+        
+
+        setOpen(false)
+       },
        onError:(err) => console.log(err),
    
        variables:{
@@ -73,6 +80,15 @@ function EditButton({post:{id,title,imagePost, body}}) {
    
 }
   
+function buttonDisabled(){
+  if(values.title.trim() === title.trim() && values.body.trim() === body.trim() && fileSelected.trim() === ''){
+    return true
+  }else if(values.title.trim() === "" || values.body.trim() === "" ){
+    return true
+  }
+   return false
+}
+
   return (
         <>
         <MyPopup content="Edit Post">
@@ -147,8 +163,7 @@ function EditButton({post:{id,title,imagePost, body}}) {
            <Button
              content="Update!"
              labelPosition='right'
-             disabled={ (values.title.trim() === title || values.title.trim() === "")  
-             && (values.body.trim() === body || values.body.trim() === "") && fileSelected === ''}
+             disabled={buttonDisabled()}
              icon='checkmark'
              onClick={() => updatePostCallback()}
              positive
