@@ -16,6 +16,8 @@ import { red } from '@material-ui/core/colors';
 import { Button,Icon, Label } from 'semantic-ui-react';
 import MyPopup from '../util/MyPopup';
 import LikeButton from './LikeButton';
+import EditButtonUi from './EditButtonUi'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
@@ -42,8 +44,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PostCardUi({post: { imagePost,title,body, createdAt, id, username, likeCount, commentCount, likes }}) {
+    
+  const {user} = useContext(AuthContext) 
   
-    const {user} = useContext(AuthContext) 
+  const updatePost = {
+      id,
+      title,
+      imagePost,
+      body
+    }
+
   
 const classes = useStyles();
   
@@ -65,6 +75,7 @@ return (
         </Typography>
         </CardContent>
       {imagePost && (<CardMedia
+        component={Link} to={`/posts/${id}`}
         className={classes.media}
         image={imagePost}
         title={title}
@@ -86,6 +97,7 @@ return (
             </Label>
           </Button>
         </MyPopup>
+        {user && user.username === username && <EditButtonUi post={updatePost} />}
         {user && user.username === username && <DeleteButtonUi postId={id} />}
       </CardActions>
      </Card>

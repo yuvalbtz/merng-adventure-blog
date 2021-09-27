@@ -5,8 +5,7 @@ import { AuthContext } from '../context/auth';
 import PostForm from '../components/PostForm';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
 import Fade from '@material-ui/core/Fade';
-import SkeletonPost from '../components/SkeletonPost'
-/////
+import SkeletonPosts from '../components/SkeletonPosts'
 import PostCardUi from '../components/PostCardUi'
 
 
@@ -28,7 +27,17 @@ function Home() {
           <PostForm />
           )}
         {loading ? (
-          <SkeletonPost/>
+         <Fade in={true}>
+         <Grid style={{marginTop:'20px'}} item xs={12}>
+    <Grid container  spacing={3}>
+    {[1,2,3,4,5,6].map((i) => (
+        <Grid key={i} item>
+          <SkeletonPosts/>
+        </Grid>
+      ))}
+    </Grid>
+  </Grid>
+  </Fade>
         ) : (
           <Fade in={true}>
              <Grid style={{marginTop:'20px'}} item xs={12}>

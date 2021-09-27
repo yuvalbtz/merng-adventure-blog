@@ -24,9 +24,10 @@ import { red } from '@material-ui/core/colors';
 import PlaceIcon from '@material-ui/icons/Place'
 import { AuthContext } from '../context/auth';
 import LikeButton from '../components/LikeButton';
-import DeleteButton from '../components/DeleteButton';
 import SkeletonPost from '../components/SkeletonPost';
 import Fade from '@material-ui/core/Fade';
+import DeleteButtonUi from '../components/DeleteButtonUi';
+import EditButtonUi from '../components/EditButtonUi';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,6 +100,15 @@ function SinglePost(props) {
       imagePost,
     } = getPost;
 
+
+    const updatePost = {
+      id,
+      title,
+      imagePost,
+      body
+    }
+
+
     postMarkup = (
       <Fade in={true}>
       <Grid>
@@ -138,8 +148,8 @@ function SinglePost(props) {
               {commentCount}
             </Label>
           </Button>
-        
-        {user && user.username === username && <DeleteButton postId={id} callback={deletePostCallback} />}
+          {user && user.username === username && <EditButtonUi post={updatePost} callback={deletePostCallback} />}
+        {user && user.username === username && <DeleteButtonUi postId={id} callback={deletePostCallback} />}
       </CardActions>
      </Card>
             {user && (
@@ -172,8 +182,8 @@ function SinglePost(props) {
             {comments.map((comment) => (
               <Cardi fluid key={comment.id}  style={{marginBottom:'10px'}}>
                 <Cardi.Content>
-                  {user && user.username === comment.username && (
-                    <DeleteButton postId={id} commentId={comment.id} />
+               {user && user.username === comment.username && (
+                    <DeleteButtonUi postId={id} commentId={comment.id} />
                   )}
                   <Cardi.Header>{comment.username}</Cardi.Header>
                   <Cardi.Meta>{moment(comment.createdAt).fromNow()}</Cardi.Meta>

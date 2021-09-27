@@ -1,11 +1,18 @@
 import React from 'react';
-import { Button, Form} from 'semantic-ui-react';
+import { Button, Card, Form, Image} from 'semantic-ui-react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useForm } from '../util/hooks';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
+import { CircularProgress, IconButton } from '@material-ui/core';
+import Icon from '@material-ui/icons/AddAPhotoOutlined'
+import Axios from 'axios'
 
 function PostForm() {
+ const formData = new FormData()
+  const [loading, setLoading] = React.useState(false)
+  const [fileSelected, setFileSelected] = React.useState('')
+ 
   const { values, onChange, onSubmit } = useForm(createPostCallback, {
     title:'',
     body: '',
@@ -23,12 +30,39 @@ function PostForm() {
       values.title = ''
       values.body = '';
       values.imagePost = '';
+      setFileSelected('')
     }
   });
 
   function createPostCallback() {
     createPost();
   }
+
+
+ 
+
+
+  function handleFileChanged(e){
+    e.preventDefault() 
+    setLoading(true)
+
+    formData.append('file', e.target.files[0])
+      formData.append('upload_preset','temed3va')
+    
+      Axios.post("https://api.cloudinary.com/v1_1/dw4v5axnj/image/upload/",formData)
+      .then(res => {
+        setFileSelected(res.data.secure_url) 
+        console.log(res.data);
+        setLoading(false)
+        values.imagePost = res.data.secure_url
+        
+     }).catch(err => console.log(err)) 
+    
+     
+    console.log('loading', loading);
+   
+   
+}
 
   return (
     <>
@@ -43,15 +77,23 @@ function PostForm() {
             value={values.title}
             error={error ? true : false}
           />
-           <Form.Input
-            width="13"
-            placeholder="image link.."
-            name="imagePost"
-            onChange={onChange}
-            value={values.imagePost}
-            error={error ? true : false}
-          />
-          <Form.TextArea
+        
+        <input name="file" accept="image/*" hidden id={`icon-button-file-image`} type="file" onChange={handleFileChanged} />
+        <label htmlFor={`icon-button-file-image`}  >
+       <IconButton color='inherit' size='small' disabled={loading} style={{backgroundColor:'white'}} aria-label="upload picture" component="span">
+      { loading ?  <CircularProgress color='secondary' size={20}/> : <Icon  /> } 
+        </IconButton>
+       </label>
+    
+       {fileSelected && ( <Card>
+        <Image src={fileSelected} wrapped ui={false} />
+      </Card>)}
+        
+     
+        
+        
+        
+         <Form.TextArea
             width="13"
             placeholder="body.."
             name="body"

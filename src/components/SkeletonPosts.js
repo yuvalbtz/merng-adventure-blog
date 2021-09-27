@@ -5,30 +5,30 @@ import CardHeader from '@material-ui/core/CardHeader';
 import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    Width: '100%',
-    height:'500px',
-    margin: theme.spacing(2),
+ media: {
+    height: 450,
+    width: 340,
   },
-  media: {
-    height: 190,
-  },
+  img:{
+    height: '30vh',
+    marginTop:'70px'
+  }
 }));
 
  export default function SkeletonPost() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.media}>
       <CardHeader
         avatar={<Skeleton animation="wave" variant="circle" width={40} height={40} />}
-        title={<Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }} />}
+        title={<Skeleton animation="wave" height={10} width="50%" style={{ marginBottom: 6 }} />}
       subheader={<Skeleton animation="wave" height={10} width="40%" />}
       />
-      {<Skeleton animation="wave" variant="rect" className={classes.media} />}
+      
+      <Skeleton animation="wave" variant="rect"  className={classes.img} />
 
      
     </Card>
   );
 }
-
