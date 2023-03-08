@@ -1,24 +1,11 @@
 # Social Blog Adventure App
+### Demo: https://adventure-blog.netlify.app/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![screenshot-6](https://user-images.githubusercontent.com/64732709/223880267-38ecac9d-535b-4912-ad64-00f09627f69c.png)
+![screenshot-7](https://user-images.githubusercontent.com/64732709/223880269-07583c07-d353-46ce-816a-f23eb4c79b8a.png)
+![screenshot-8](https://user-images.githubusercontent.com/64732709/223880206-921fb71f-a1e2-422f-8bf5-09d99a67b68a.png)
+![screenshot-9](https://user-images.githubusercontent.com/64732709/223880230-ed67af40-857c-4ba9-bba4-65fa8b43d77d.png)
+![screenshot-10](https://user-images.githubusercontent.com/64732709/223880251-9f311f44-0295-4332-b1db-6b794d32708d.png)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
