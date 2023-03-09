@@ -8,6 +8,15 @@
 ![screenshot-10](https://user-images.githubusercontent.com/64732709/223880251-9f311f44-0295-4332-b1db-6b794d32708d.png)
 
 
+## run the code:
+
+### running the client:
+```
+$ npm install
+$ npm start
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
